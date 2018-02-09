@@ -1,0 +1,129 @@
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial: Hello Dojo!</title>
+    <link rel="stylesheet" href="{% static 'app/dijit/themes/claro/claro.css' %}">
+    <link rel="stylesheet" href="{% static 'app/dojo/resources/dojo.css' %}">
+    <script src="{% static 'app/dojo/dojo.js' %}" djConfig="parseOnLoad: true"></script>
+
+    <script>
+    dojo.require("dojo.parser");
+    dojo.require("dijit.layout.ContentPane");
+    dojo.require("dijit.layout.TabContainer");
+    dojo.require("dijit.form.ValidationTextBox");
+    dojo.require("dijit.form.DateTextBox");
+    </script>
+
+    <style>
+    .formContainer {
+    width:600px;
+    height:600px;
+    }
+    label {
+    width:150px;
+    float:left;
+    }
+    </style>
+
+</head>
+
+<body class="claro">
+
+    <div class="formContainer" dojoType="dijit.layout.TabContainer" style="width:600px;height:600px">
+
+    <div dojoType="dijit.layout.ContentPane" title="Personal Data">
+
+    <label for="first_name">First Name:</label>
+    <input type="text" name="first_name" id="first_name"
+        dojoType="dijit.form.ValidationTextBox"
+        trim="true"
+        propercase="true"
+        required="true"
+        size="30"
+        missingMessage="You must enter your first name" /><br/>
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" name="last_name" id="last_name"
+        dojoType="dijit.form.ValidationTextBox"
+        trim="true"
+        propercase="true"
+        required="true"
+        size="30"
+        missingMessage="You must enter your last name" /><br/>
+
+    <label for="middle_initial">Middle Initial:</label>
+    <input type="text" name="middle_initial" id="middle_initial"
+        dojoType="dijit.form.ValidationTextBox"
+        trim="true"
+        propercase="true"
+        required="true"
+        size="1"
+        missingMessage="You must enter middle initial" /><br/>
+
+    <label for="email">Email:</label>
+    <input type="text" name="email" id="email" size="30"
+        dojoType="dijit.form.ValidationTextBox" regExp=".*@.*"
+        missingMessage="Некорректный адрес электронной почты"/><br/>
+
+
+    </div>
+
+    <div dojoType="dijit.layout.ContentPane" title="Address">
+    <label for="address_line_1">Address Line 1:</label>
+    <input type="text" name="address_line_1" id="address_line_1" size="30" /><br/>
+    <label for="address_line_2">Address Line 2:</label>
+    <input type="text" name="address_line_2" id="address_line_2" size="30" /><br/>
+    <label for="city">City:</label>
+    <input type="text" name="city" id="city" size="30" /><br/>
+    <label for="state">State:</label>
+    <input type="text" name="state" id="state" size="2" /><br/>
+    <label for="postal_code">Postal Code:</label>
+    <input type="text" name="postal_code" id="postal_code" size="15" /><br/>
+    <label for="country">Country:</label>
+    <input type="text" name="country" id="country" size="30" /><br/>
+
+    <label for="date_move">Date of Move to this Address:</label>
+    <input type="text" name="date_move" id="date_move" size="11"
+          dojoType="dijit.form.DateTextBox" /><br/>
+
+    </div>
+
+    <div dojoType="dijit.layout.ContentPane" title="Phones">
+    <label for="home_phone">Home Phone:</label>
+    <input type="text" name="home_phone" id="home_phone" size="30" /><br/>
+    <label for="work_phone">Work Phone:</label>
+    <input type="text" name="work_phone" id="work_phone" size="30" /><br/>
+    <label for="cell_phone">Cell Phone:</label>
+    <input type="text" name="cell_phone" id="cell_phone" size="30" /><br/>
+    </div>
+
+    </div>
+
+    <div id=listOfUrls></div>
+
+
+    <script>
+// Assume there's a <ul id="listOfUrls"></ul> present.
+var listNode = document.getElementById("listOfUrls");
+// You want to turn this:
+var urls = [
+{ url: "http://www.yahoo.com", title: "Yahoo" },
+{ url: "http://www.ask.com", title: "Ask" },
+{ url: "http://www.google.com", title: "Google" }
+];
+/* into this:
+<li><a href="http://www.yahoo.com">Yahoo</a></li>
+<li><a href="http://www.ask.com">Ask</a></li>
+<li><a href="http://www.google.com">Google</a></li>
+*/
+for (var i=0; i < urls.length; i++) {
+var listItem = document.createElement("li");
+listItem.innerHTML =
+dojo.string.substitute("<a href='${url}'>${title}</a>", result);
+listNode.appendChild(listItem);
+}
+    </script>
+
+</body>
+</html>

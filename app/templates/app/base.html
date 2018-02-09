@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Justa Cigar Wish List</title>
+
+    <!--<p><link rel="stylesheet" href="{% static 'app/dojo/resources/dojo.css' %}">
+    <link rel="stylesheet" href="{% static 'app/dijit/themes/tundra/tundra.css' %}">
+    <link rel="stylesheet" href="{% static 'app/dojox/grid/_grid/tundraGrid.css' %}">
+
+    <script src="{% static 'app/dojo/dojo.js' %}" djConfig="parseOnLoad: true"></script>
+    </p>-->
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.13.0/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
+
+    <script>
+    dojo.require("dojo.parser");
+    dojo.require("dojo.data.ItemFileReadStore");
+    dojo.require("dojox.grid.Grid");
+    </script>
+
+    <style>
+    #grid {
+        border: 1px solid #333;
+        width: 550px;
+        margin: 10px;
+        height: 200px;
+        font-size: 0.9em;
+        font-family: Geneva, Arial, Helvetica, sans-serif;
+    }
+    </style>
+</head>
+
+<body class="tundra">
+
+<h1>Justa Cigar Corporation</h1>
+<h3>"Sometimes a cigar is a Justa Cigar!"</h3>
+
+<div dojoType="dojo.data.ItemFileReadStore"
+jsId="wishStore" url="app/cigar_wish_list">
+</div>
+
+
+<table id="grid" dojoType="dojox.grid.Grid" store="wishStore"
+query="{ wishId: '*' }" clientSort="true">
+<thead>
+<tr>
+<th field="description" width="15em">Cigar</th>
+<th field="size">Length/Ring</th>
+<th field="origin">Origin</th>
+<th field="wrapper">Wrapper</th>
+<th field="shape">Shape</th>
+</tr>
+</thead>
+</table>
+
+</body>
+</html>
